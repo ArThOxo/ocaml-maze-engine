@@ -36,12 +36,27 @@ let get_dimensions g =
 
 
 
-(* Affiche le labyrinthe dans le terminal ligne par ligne *)
+
+(* Affichage texte brut (pour sauvegarder dans un fichier propre) *)
 let print g =
   for i = 0 to g.nb_lignes - 1 do
     let ligne = g.cases.(i) in
     for j = 0 to g.nb_colonnes - 1 do
       print_char ligne.(j)
+    done;
+    print_newline ()
+  done
+
+(* Affichage avec couleurs ANSI (pour le style dans le terminal) *)
+let print_color g =
+  for i = 0 to g.nb_lignes - 1 do
+    let ligne = g.cases.(i) in
+    for j = 0 to g.nb_colonnes - 1 do
+      match ligne.(j) with
+      | 'S' | 'E' -> Printf.printf "\027[1;31m%c\027[0m" ligne.(j)
+      | '.' -> Printf.printf "\027[1;32m%c\027[0m" ligne.(j)
+      | '+' | '-' | '|' -> Printf.printf "\027[36m%c\027[0m" ligne.(j)
+      | c -> print_char c
     done;
     print_newline ()
   done
@@ -163,3 +178,45 @@ let check g =
 (* Permet de lire le contenu d'une case précise de la grille *)
 let get g i j =
     g.cases.(i).(j)
+
+
+
+
+(* Cherche un chemin avec une animation visuelle en direct dans le terminal *)
+let solve_animated g =
+  print_color g; (* Affiche la grille une première fois *)
+  let rec parcours i j =
+    if i < 0 || i >= g.nb_lignes || j < 0 || j >= g.nb_colonnes then
+      false
+    else if g.cases.(i).(j) = 'E' then
+      true
+    else if g.cases.(i).(j) <> ' ' && g.cases.(i).(j) <> 'S' then
+      false
+    else begin
+      if g.cases.(i).(j) <> 'S' then g.cases.(i).(j) <- '.';
+      
+      (* --- ANIMATION AVANCÉE --- *)
+      Printf.printf "\027[%dA" g.nb_lignes; (* Remonte le curseur *)
+      print_color g;
+      flush stdout;
+      Unix.sleepf 0.01; (* Pause de 20 millisecondes *)
+      
+      if parcours (i + 1) j || parcours (i - 1) j || 
+         parcours i (j + 1) || parcours i (j - 1) then
+        true
+      else begin
+        if g.cases.(i).(j) <> 'S' then g.cases.(i).(j) <- ' ';
+        
+        (* --- ANIMATION RETOUR (BACKTRACKING) --- *)
+        Printf.printf "\027[%dA" g.nb_lignes;
+        print_color g;
+        flush stdout;
+        Unix.sleepf 0.01;
+        
+        false
+      end
+    end
+  in
+  match trouver_depart g with
+  | Some (x, y) -> parcours x y
+  | None -> false
