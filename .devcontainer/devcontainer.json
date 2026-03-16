@@ -1,0 +1,13 @@
+{
+  "name": "OCaml Project",
+  "image": "ocaml/opam:ubuntu-22.04-ocaml-4.14",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:1": {}
+  },
+  "postCreateCommand": "opam install -y dune && chmod +x demo.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ocamllabs.ocaml-platform"]
+    }
+  }
+}
