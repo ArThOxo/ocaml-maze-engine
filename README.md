@@ -16,7 +16,7 @@ Watch the algorithm build and solve the maze in real-time:
 
 ## ⚡ Try it instantly (No installation required)
 
-You can test this project directly in your browser without installing anything. Click the button below to launch a fully configured Linux environment via GitHub Codespaces:
+You can test this project directly in your browser without installing anything. Click the button below to launch a fully configured Linux environment via GitHub Codespace "Note: Initial setup may take 2-3 minutes":
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ArThOxo/ocaml-maze-engine)
 
