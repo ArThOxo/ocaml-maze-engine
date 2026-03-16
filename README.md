@@ -11,7 +11,7 @@ A high-performance algorithmic project written entirely in **OCaml**. It generat
 Watch the algorithm build and solve the maze in real-time:
 
 <p align="center">
-  <img src="demo.gif" width="600" alt="Maze Live Animation">
+  <img src="demo.gif" width="100" alt="Maze Live Animation">
 </p>
 
 ## ⚡ Try it instantly (No installation required)
