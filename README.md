@@ -10,7 +10,9 @@ A high-performance algorithmic project written entirely in **OCaml**. It generat
 
 Watch the algorithm build and solve the maze in real-time:
 
-![Maze Live Animation](demo.gif)
+<p align="center">
+  <img src="demo.gif" width="600" alt="Maze Live Animation">
+</p>
 
 ## ⚡ Try it instantly (No installation required)
 
