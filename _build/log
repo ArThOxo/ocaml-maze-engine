@@ -1,4 +1,4 @@
-# dune build @fmt --auto-promote
+# dune build
 # OCAMLPARAM: unset
 # Shared cache: enabled-except-user-rules
 # Shared cache location: /home/arthu/.cache/dune/db
@@ -14,4 +14,4 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ /usr/bin/ocamlc.opt -config > /tmp/dune_8d3de7_output
+$ /usr/bin/ocamlc.opt -config > /tmp/dune_c6ba6d_output
